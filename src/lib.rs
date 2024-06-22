@@ -5,6 +5,7 @@ use tsify_next::Tsify;
 use validator::{Validate, ValidationErrors};
 use wasm_bindgen::prelude::*;
 use anyhow::Result;
+use gloo::net::http::Request;
 
 #[wasm_bindgen]
 extern "C" {
@@ -64,9 +65,17 @@ pub async fn insert_all_points () {
 #[wasm_bindgen]
 pub async fn get_all_points () -> Result<PointsRes, String> {
 
-    let res = reqwest::get("http://localhost:5000/points")
-                .await.map_err(|_| "API call error".to_string())?.json()
-                .await.map_err(|_| "JSON error".to_string())?;
+    // let res = reqwest::get("http://localhost:5000/points")
+    //             .await.map_err(|_| "API call error".to_string())?.json()
+    //             .await.map_err(|_| "JSON error".to_string())?;
+
+    let res = Request::get("http://localhost:5000/points")
+                .send()
+                .await
+                .map_err(|_| "API call error".to_string())?
+                .json()
+                .await
+                .map_err(|_| "JSON error".to_string())?;
 
     Ok(PointsRes {
         points: res

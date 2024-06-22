@@ -18,7 +18,9 @@ validator = { version = "0", features = ["derive"] }
 anyhow = "1"
 thiserror = "1"
 gluesql = {version = "0" , default-features = false, features = ["idb-storage"]}
-reqwest = {version = "0", features = ["json"]}
+gloo = {version = "0"}
+#rexie = {version = "0"}
+#reqwest = {version = "0", features = ["json"]}
 wasm-bindgen-futures = "0"
 # The `console_error_panic_hook` crate provides better debugging of panics by
 # logging them with `console.error`. This is great for development, but requires
